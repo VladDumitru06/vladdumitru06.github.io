@@ -1,0 +1,141 @@
+/* Container Card */
+.card {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Header */
+.card-header {
+    margin-bottom: 16px;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin: 0;
+    color: black;
+}
+
+/* Card Content */
+.card-content {
+    font-family: Arial, sans-serif;
+}
+
+/* Question Text */
+.question-text {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: black;
+}
+
+/* Answer Buttons */
+.answers .btn {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    text-align: left;
+    border: 1px solid #007bff;
+    background-color: #fff;
+    color: #007bff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.answers .btn:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Results Section */
+.results .result-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.result-style {
+    flex: 0 0 100px;
+    text-transform: capitalize;
+    color: black;
+}
+
+.result-bar-container {
+    flex: 1;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    height: 20px;
+    margin: 0 10px;
+    position: relative;
+}
+
+.results-bar-fill {
+    background-color: #007bff;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.result-score {
+    width: 30px;
+    text-align: right;
+    color: black;
+}
+
+/* Dominant Styles Description */
+.dominant-styles {
+    margin-top: 20px;
+    color: black;
+}
+
+.dominant-styles h3 {
+    margin-bottom: 10px;
+    color: black;
+}
+
+.result-description {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px;
+    background-color: #e7f3ff;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.result-style-title {
+    font-weight: bold;
+    text-transform: capitalize;
+    margin: 0 0 5px;
+    color: black;
+}
+
+/* Icon Styling */
+.icon {
+    width: 20px;
+    height: 20px;
+    fill: #007bff;
+}
+
+/* Restart Button */
+.restart-btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 20px;
+    transition: background-color 0.2s;
+}
+
+.restart-btn:hover {
+    background-color: #0056b3;
+}
