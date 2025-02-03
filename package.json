@@ -1,5 +1,10 @@
 {
+  "homepage":"http://vladdumitru06.github.io/conflict-management",
   "dependencies": {
     "create-vite": "^6.1.1"
+  },
+  "scripts":{
+    "predeploy":"npm run build",
+    "deploy":"gh-pages -d build"
   }
 }

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conflict Style Quiz</title>
+  <style>
+    /* Container Card */
+    .card {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Card Header */
+    .card-header {
+      margin-bottom: 16px;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      margin: 0;
+      color: black;
+    }
+
+    /* Card Content */
+    .card-content {
+      font-family: Arial, sans-serif;
+    }
+
+    /* Question Text */
+    .question-text {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      color: black;
+    }
+
+    /* Answer Buttons */
+    .answers .btn {
+      display: block;
+      width: 100%;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      text-align: left;
+      border: 1px solid #007bff;
+      background-color: #fff;
+      color: #007bff;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .answers .btn:hover {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    /* Results Section */
+    .results .result-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .result-style {
+      flex: 0 0 100px;
+      text-transform: capitalize;
+      color: black;
+    }
+
+    .result-bar-container {
+      flex: 1;
+      background-color: #f0f0f0;
+      border-radius: 8px;
+      height: 20px;
+      margin: 0 10px;
+      position: relative;
+    }
+
+    .results-bar-fill {
+      background-color: #007bff;
+      height: 100%;
+      border-radius: 8px;
+    }
+
+    .result-score {
+      width: 30px;
+      text-align: right;
+      color: black;
+    }
+
+    /* Dominant Styles Description */
+    .dominant-styles {
+      margin-top: 20px;
+      color: black;
+    }
+
+    .dominant-styles h3 {
+      margin-bottom: 10px;
+      color: black;
+    }
+
+    .result-description {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px;
+      background-color: #e7f3ff;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .result-style-title {
+      font-weight: bold;
+      text-transform: capitalize;
+      margin: 0 0 5px;
+      color: black;
+    }
+
+    /* Icon Styling */
+    .icon {
+      width: 20px;
+      height: 20px;
+      fill: #007bff;
+    }
+
+    /* Restart Button */
+    .restart-btn {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 20px;
+      transition: background-color 0.2s;
+    }
+
+    .restart-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <!-- Container where the quiz will be rendered -->
+  <div id="quiz-container"></div>
+
+  <script>
+    // Quiz data
+    const questions = [
+      {
+        text: "Un coleg nu își respectă promisiunea de a livra un raport la timp, ceea ce îți afectează munca. Cum reacționezi?",
+        answers: [
+          { text: "Ignor situația pentru moment, sperând că va rezolva problema de unul singur", style: "evitativ" },
+          { text: "Îi cer imediat o explicație și insist să livreze raportul cât mai repede", style: "competitiv" },
+          { text: "Accept întârzierea fără să ridic problema, pentru a menține relația bună cu colegul", style: "acomodativ" },
+          { text: "Negociez o nouă dată de livrare care să fie acceptabilă pentru amândoi", style: "compromis" },
+          { text: "Discut cu colegul pentru a găsi împreună o soluție care să ne ajute pe amândoi", style: "colaborativ" }
+        ]
+      },
+      {
+        text: "Ai de ales între o soluție rapidă, dar imperfectă, și una ideală, dar care necesită mai mult timp. Cum decizi?",
+        answers: [
+          { text: "Aleg soluția propusă de altcineva, chiar dacă nu sunt de acord, pentru a evita un conflict", style: "acomodativ" },
+          { text: "Optez pentru o variantă de compromis între cele două soluții", style: "compromis" },
+          { text: "Aleg soluția rapidă, pentru că este important să termin treaba cât mai repede", style: "competitiv" },
+          { text: "Amân decizia până când devine absolut necesar să aleg una dintre ele", style: "evitativ" },
+          { text: "Discut cu echipa pentru a vedea ce variantă ar fi cea mai benefică pentru toți", style: "colaborativ" }
+        ]
+      },
+      {
+        text: "Într-o ședință, colegii tăi au păreri foarte diferite despre modul de abordare a unui proiect. Cum reacționezi?",
+        answers: [
+          { text: "Accept opinia majorității, chiar dacă nu sunt de acord", style: "acomodativ" },
+          { text: "Încurajez o discuție deschisă pentru a găsi o soluție care să mulțumească pe toată lumea", style: "colaborativ" },
+          { text: "Propun o soluție de mijloc pentru a încheia discuția mai repede", style: "compromis" },
+          { text: "Îmi impun opinia, fiind convins că este cea mai bună", style: "competitiv" },
+          { text: "Rămân tăcut și aștept ca ceilalți să ajungă la un consens", style: "evitativ" }
+        ]
+      },
+      {
+        text: "Un client critică aspru munca ta. Ce faci?",
+        answers: [
+          { text: "Îmi cer scuze și promit să fac schimbări conform dorințelor sale", style: "acomodativ" },
+          { text: "Evit discuția și sper că situația se va rezolva de la sine", style: "evitativ" },
+          { text: "Încerc să înțeleg exact ce nu i-a plăcut și să găsim împreună o soluție", style: "colaborativ" },
+          { text: "Îi ofer o mică concesie pentru a-l liniști", style: "compromis" },
+          { text: "Îi explic de ce munca mea este corectă și încerc să îl conving", style: "competitiv" }
+        ]
+      },
+      {
+        text: "În timpul unui proiect important, descoperi că un membru al echipei folosește o metodologie diferită de cea agreată inițial. Ce abordare alegi?",
+        answers: [
+          { text: "Propun să folosim o combinație între cele două metodologii", style: "compromis" },
+          { text: "Insist să se conformeze metodologiei stabilite inițial, deoarece așa am stabilit", style: "competitiv" },
+          { text: "Las situația să continue fără intervenție, considerând că nu merită să creez tensiuni", style: "evitativ" },
+          { text: "Accept noua metodologie pentru a menține armonia în echipă", style: "acomodativ" },
+          { text: "Organizez o întâlnire pentru a discuta beneficiile ambelor metodologii și a decide împreună", style: "colaborativ" }
+        ]
+      }
+    ];
+
+    const styleDescriptions = {
+      competitiv: "Stilul competitiv este orientat spre rezultate și putere. Folosești acest stil când obiectivele tale sunt foarte importante.",
+      colaborativ: "Stilul colaborativ caută soluții care să satisfacă nevoile tuturor părților implicate. Este util în situații complexe care necesită o soluție creativă.",
+      compromis: "Stilul de compromis caută soluții parțial satisfăcătoare pentru toți. Este util când timpul este limitat sau când alte stiluri nu funcționează.",
+      evitativ: "Stilul evitativ amână sau evită conflictul. Poate fi util în situații minore sau când tensiunile sunt prea mari.",
+      acomodativ: "Stilul acomodativ pune accent pe menținerea relațiilor. Este util când problema nu este foarte importantă pentru tine."
+    };
+
+    // Application state
+    let shuffledQuestions = [];
+    let currentQuestion = 0;
+    let answers = [];
+    let showResults = false;
+
+    // Get reference to the container
+    const container = document.getElementById("quiz-container");
+
+    // Utility: shuffle an array
+    function shuffleArray(array) {
+      const newArray = array.slice();
+      for (let i = newArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+      }
+      return newArray;
+    }
+
+    // Initialize quiz by shuffling answers for each question
+    function initQuiz() {
+      shuffledQuestions = questions.map(q => {
+        return {
+          text: q.text,
+          answers: shuffleArray(q.answers)
+        };
+      });
+      currentQuestion = 0;
+      answers = [];
+      showResults = false;
+      render();
+    }
+
+    // Render the quiz (either question or results)
+    function render() {
+      if (showResults) {
+        renderResults();
+      } else {
+        renderQuestion();
+      }
+    }
+
+    // Render current question
+    function renderQuestion() {
+      const question = shuffledQuestions[currentQuestion];
+      container.innerHTML = `
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Întrebarea ${currentQuestion + 1} din ${questions.length}</h2>
+          </div>
+          <div class="card-content">
+            <p class="question-text">${question.text}</p>
+            <div class="answers">
+              ${question.answers
+                .map(
+                  (answer, index) => `
+                <button class="btn" onclick="handleAnswer('${answer.style}')">
+                  ${answer.text}
+                </button>
+              `
+                )
+                .join("")}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Handle answer click
+    function handleAnswer(style) {
+      answers.push(style);
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+      } else {
+        showResults = true;
+      }
+      render();
+    }
+
+    // Calculate results
+    function calculateResults() {
+      const styles = ["competitiv", "colaborativ", "compromis", "evitativ", "acomodativ"];
+      const counts = {};
+      styles.forEach(style => {
+        counts[style] = answers.filter(a => a === style).length;
+      });
+      return counts;
+    }
+
+    // Render results page
+    function renderResults() {
+      const results = calculateResults();
+      const maxScore = Math.max(...Object.values(results));
+      const dominantStyles = Object.entries(results)
+        .filter(([style, score]) => score === maxScore)
+        .map(([style]) => style);
+
+      container.innerHTML = `
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Rezultatele tale</h2>
+          </div>
+          <div class="card-content">
+            <div class="results">
+              ${Object.entries(results)
+                .map(
+                  ([style, score]) => `
+                <div class="result-row">
+                  <div class="result-style">${style}</div>
+                  <div class="result-bar-container">
+                    <div class="results-bar-fill" style="width: ${(score / questions.length) * 100}%"></div>
+                  </div>
+                  <div class="result-score">${score}</div>
+                </div>
+              `
+                )
+                .join("")}
+            </div>
+
+            <div class="dominant-styles">
+              <h3>Stilul(ile) tău(tale) dominant(e):</h3>
+              ${dominantStyles
+                .map(
+                  style => `
+                <div class="result-description">
+                  ${getAlertCircleSVG()}
+                  <div>
+                    <div class="result-style-title">${style}</div>
+                    <p>${styleDescriptions[style]}</p>
+                  </div>
+                </div>
+              `
+                )
+                .join("")}
+            </div>
+
+            <button onclick="initQuiz()" class="restart-btn">Încearcă din nou</button>
+          </div>
+        </div>
+      `;
+    }
+
+    // Returns the inline SVG for AlertCircle icon (from lucide icons)
+    function getAlertCircleSVG() {
+      return `
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" stroke="#007bff" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>
+      `;
+    }
+
+    // Start the quiz once the DOM is loaded
+    window.onload = initQuiz;
+  </script>
+</body>
+</html>
