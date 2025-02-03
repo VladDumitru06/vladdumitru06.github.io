@@ -54,7 +54,22 @@
       font-size: 1rem;
       transition: background-color 0.2s, color 0.2s;
     }
-
+    .back {
+        
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 20px;
+      transition: background-color 0.2s;
+    }
+    .back:hover {
+        background-color: #0067d4;
+    }
     .answers .btn:hover {
       background-color: #007bff;
       color: #fff;
@@ -313,7 +328,10 @@ const questions = [
     function renderQuestion() {
       const question = shuffledQuestions[currentQuestion];
       container.innerHTML = `
-        <div class="card">
+     <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGVC4-KJp0GDg/company-logo_200_200/company-logo_200_200/0/1695885935244/romcapital_invest_logo?e=2147483647&v=beta&t=PjPTWKefimBulhcwdCNJPpNTM0WkW1XuUaDimc5gbt8" 
+alt="Conflict Style Quiz" 
+style="display: block; margin: 0 auto; width: auto; height: auto; max-width: 200px; border-radius: 8px; margin-bottom: 20px;">
+  <div class="card">
           <div class="card-header">
             <h2 class="card-title">Întrebarea ${currentQuestion + 1} din ${questions.length}</h2>
           </div>
@@ -326,15 +344,26 @@ const questions = [
                 <button class="btn" onclick="handleAnswer('${answer.style}')">
                   ${answer.text}
                 </button>
+                
               `
                 )
                 .join("")}
+            ${currentQuestion > 0 ? `<button class="back" onclick="backAnswer()">
+                  Inapoi
+                </button>` : ``} 
             </div>
           </div>
         </div>
       `;
     }
-
+    function backAnswer() {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        answers.pop()
+            
+      }
+      render();
+    }
     // Handle answer click
     function handleAnswer(style) {
       answers.push(style);
