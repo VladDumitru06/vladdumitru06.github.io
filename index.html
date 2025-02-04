@@ -393,9 +393,12 @@ style="display: block; margin: 0 auto; width: auto; height: auto; max-width: 200
         .filter(([style, score]) => score === maxScore)
         .map(([style]) => style);
 
-      container.innerHTML = `
+      container.innerHTML = ` <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGVC4-KJp0GDg/company-logo_200_200/company-logo_200_200/0/1695885935244/romcapital_invest_logo?e=2147483647&v=beta&t=PjPTWKefimBulhcwdCNJPpNTM0WkW1XuUaDimc5gbt8" 
+alt="Logo RCI" 
+style="display: block; margin: 0 auto; width: auto; height: auto; max-width: 200px; border-radius: 8px; margin-bottom: 20px;">
         <div class="card">
           <div class="card-header">
+            
             <h2 class="card-title">Rezultatele tale</h2>
           </div>
           <div class="card-content">
@@ -416,7 +419,7 @@ style="display: block; margin: 0 auto; width: auto; height: auto; max-width: 200
             </div>
 
             <div class="dominant-styles">
-              <h3>Stilul tău dominant:</h3>
+              ${dominantStyles.length > 1 ? `<h3>Stilurile dumneavoastră dominante:</h3>` : `<h3>Stilul dumneavoastră dominant:</h3>`}
               ${dominantStyles
                 .map(
                   style => `
