@@ -172,107 +172,106 @@
 
 const questions = [
   {
-    text: "Un coleg nu își respectă promisiunea de a livra un raport la timp, ceea ce îți afectează munca. Cum reacționezi?",
+    text: "Ești liderul unui proiect, iar un membru al echipei întârzie constant cu sarcinile. Cum abordezi situația?",
     answers: [
-      { text: "Ignor situația pentru moment, sperând că va rezolva problema de unul singur", style: "evitativ" },
-      { text: "Îi cer imediat o explicație și insist să livreze raportul cât mai repede", style: "competitiv" },
-      { text: "Accept întârzierea fără să ridic problema, pentru a menține relația bună cu colegul", style: "acomodativ" },
-      { text: "Negociez o nouă dată de livrare care să fie acceptabilă pentru amândoi", style: "compromis" },
-      { text: "Discut cu colegul pentru a găsi împreună o soluție care să ne ajute pe amândoi", style: "colaborativ" }
+      { text: "Îl confrunți direct și îi impui să respecte termenele.", style: "competitiv" },
+      { text: "Discuți cu el în privat, încercând să înțelegi motivele întârzierilor și să găsiți soluții împreună.", style: "colaborativ" },
+      { text: "Îi acorzi mai mult timp, sperând că se va mobiliza singur.", style: "evitativ" },
+      { text: "Preiei o parte din sarcinile lui pentru a nu afecta proiectul.", style: "acomodativ" },
+      { text: "Îi oferi un ultimatum: fie se conformează, fie este exclus din echipă.", style: "compromis" }
     ]
   },
   {
-    text: "Ai de ales între o soluție rapidă, dar imperfectă, și una ideală, dar care necesită mai mult timp. Cum decizi?",
+    text: "Într-o negociere, cealaltă parte adoptă o poziție inflexibilă. Cum reacționezi?",
     answers: [
-      { text: "Aleg soluția propusă de altcineva, chiar dacă nu sunt de acord, pentru a evita un conflict", style: "acomodativ" },
-      { text: "Optez pentru o variantă de compromis între cele două soluții", style: "compromis" },
-      { text: "Aleg soluția rapidă, pentru că este important să termin treaba cât mai repede", style: "competitiv" },
-      { text: "Amân decizia până când devine absolut necesar să aleg una dintre ele", style: "evitativ" },
-      { text: "Discut cu echipa pentru a vedea ce variantă ar fi cea mai benefică pentru toți", style: "colaborativ" }
+      { text: "Cauți puncte comune și încerci să găsești o soluție avantajoasă pentru ambele părți.", style: "colaborativ" },
+      { text: "Menții o poziție fermă și nu cedezi până nu obții ce vrei.", style: "competitiv" },
+      { text: "Faci concesii majore pentru a ajunge la un acord.", style: "acomodativ" },
+      { text: "Întrerupi negocierea și cauți alternative.", style: "evitativ" },
+      { text: "Propun o soluție de compromis, fiecare parte cedând puțin.", style: "compromis" }
     ]
   },
   {
-    text: "Într-o ședință, colegii tăi au păreri foarte diferite despre modul de abordare a unui proiect. Cum reacționezi?",
+    text: "Un coleg îți cere ajutorul pentru o sarcină complexă, dar ești presat de timp. Cum răspunzi?",
     answers: [
-      { text: "Accept opinia majorității, chiar dacă nu sunt de acord", style: "acomodativ" },
-      { text: "Încurajez o discuție deschisă pentru a găsi o soluție care să mulțumească pe toată lumea", style: "colaborativ" },
-      { text: "Propun o soluție de mijloc pentru a încheia discuția mai repede", style: "compromis" },
-      { text: "Îmi impun opinia, fiind convins că este cea mai bună", style: "competitiv" },
-      { text: "Rămân tăcut și aștept ca ceilalți să ajungă la un consens", style: "evitativ" }
+      { text: "Refuzi politicos, explicând că nu ai timp.", style: "competitiv" },
+      { text: "Îi oferi ajutor limitat, în funcție de disponibilitatea ta.", style: "compromis" },
+      { text: "Îl ajuți, chiar dacă asta înseamnă să-ți neglijezi propriile sarcini.", style: "acomodativ" },
+      { text: "Îi sugerezi să ceară ajutorul altei persoane.", style: "evitativ" },
+      { text: "Îi propui să lucrați împreună la sarcină, împărțind responsabilitățile.", style: "colaborativ" }
     ]
   },
   {
-    text: "Un client critică aspru munca ta. Ce faci?",
+    text: "Ești martorul unui conflict între doi colegi. Cum intervii?",
     answers: [
-      { text: "Îmi cer scuze și promit să fac schimbări conform dorințelor sale", style: "acomodativ" },
-      { text: "Evit discuția și sper că situația se va rezolva de la sine", style: "evitativ" },
-      { text: "Încerc să înțeleg exact ce nu i-a plăcut și să găsim împreună o soluție", style: "colaborativ" },
-      { text: "Îi ofer o mică concesie pentru a-l liniști", style: "compromis" },
-      { text: "Îi explic de ce munca mea este corectă și încerc să îl conving", style: "competitiv" }
+      { text: "Îi lași să-și rezolve singuri conflictul.", style: "evitativ" },
+      { text: "Intermediezi și încerci să-i ajuți să ajungă la un compromis.", style: "compromis" },
+      { text: "Iei partea celui care crezi că are dreptate.", style: "competitiv" },
+      { text: "Îi asculți pe amândoi și încerci să găsiți o soluție care să-i mulțumească pe toți.", style: "colaborativ" },
+      { text: "Încerci să calmezi spiritele și să-i împaci.", style: "acomodativ" }
     ]
   },
   {
-    text: "În timpul unui proiect important, descoperi că un membru al echipei folosește o metodologie diferită de cea agreată inițial. Ce abordare alegi?",
+    text: "Ai o idee inovatoare, dar riscantă, pentru un proiect. Cum o prezinți echipei?",
     answers: [
-      { text: "Propun să folosim o combinație între cele două metodologii", style: "compromis" },
-      { text: "Insist să se conformeze metodologiei stabilite inițial, deoarece așa am stabilit", style: "competitiv" },
-      { text: "Las situația să continue fără intervenție, considerând că nu merită să creez tensiuni", style: "evitativ" },
-      { text: "Accept noua metodologie pentru a menține armonia în echipă", style: "acomodativ" },
-      { text: "Organizez o întâlnire pentru a discuta beneficiile ambelor metodologii și a decide împreună", style: "colaborativ" }
+      { text: "Îți asumi riscul și o prezinți cu entuziasm, argumentând beneficiile.", style: "competitiv" },
+      { text: "O prezinți cu precauție, subliniind și posibilele riscuri.", style: "compromis" },
+      { text: "Renunți la idee, preferând să mergi la sigur.", style: "evitativ" },
+      { text: "O adaptezi la ideile celorlalți, pentru a fi mai ușor acceptată.", style: "acomodativ" },
+      { text: "Organizezi o sesiune de brainstorming pentru a dezvolta ideea împreună cu echipa.", style: "colaborativ" }
     ]
   },
   {
-    text: "În timpul unei negocieri cu un furnizor, acesta nu vrea să reducă prețul unui produs esențial. Cum reacționezi?",
+    text: "Un client se plânge de un produs/serviciu. Cum gestionezi reclamația?",
     answers: [
-      { text: "Cedez și accept prețul cerut pentru a evita un conflict", style: "acomodativ" },
-      { text: "Caut o soluție de mijloc pentru a ajunge la un acord", style: "compromis" },
-      { text: "Insist să reducă prețul, argumentând în favoarea mea", style: "competitiv" },
-      { text: "Încerc să înțeleg perspectiva furnizorului și să găsim împreună o soluție", style: "colaborativ" },
-      { text: "Renunț la negociere și caut alt furnizor", style: "evitativ" }
+      { text: "Îți ceri scuze și oferi o compensație.", style: "acomodativ" },
+      { text: "Îl asculți cu atenție și încerci să găsești o soluție care să-l mulțumească.", style: "colaborativ" },
+      { text: "Îi explici de ce nu are dreptate.", style: "competitiv" },
+      { text: "Îi oferi o soluție standard, conform procedurilor.", style: "compromis" },
+      { text: "Îl redirecționezi către altcineva.", style: "evitativ" }
     ]
   },
   {
-    text: "Un coleg îți cere să îl ajuți cu o sarcină urgentă, dar ai deja foarte multe responsabilități. Cum reacționezi?",
+    text: "Trebuie să iei o decizie importantă într-un timp scurt. Cum procedezi?",
     answers: [
-      { text: "Refuz ferm, explicând că am deja prea multe sarcini", style: "competitiv" },
-      { text: "Îi spun că îl voi ajuta puțin, dar nu pot prelua toată sarcina", style: "compromis" },
-      { text: "Încerc să îmi reorganizez timpul pentru a-l ajuta cât pot", style: "colaborativ" },
-      { text: "Îi accept cererea fără ezitare, chiar dacă îmi afectează munca", style: "acomodativ" },
-      { text: "Evit să dau un răspuns clar și sper că va găsi altă soluție", style: "evitativ" }
+      { text: "Te bazezi pe intuiție și experiență.", style: "competitiv" },
+      { text: "Aduni informații și analizezi toate opțiunile.", style: "colaborativ" },
+      { text: "Ceri sfatul unor persoane de încredere.", style: "compromis" },
+      { text: "Amâni decizia cât mai mult posibil.", style: "evitativ" },
+      { text: "Te conformezi opiniei majorității.", style: "acomodativ" }
     ]
   },
   {
-    text: "Șeful tău îți cere să lucrezi peste program, dar ai planuri personale importante. Ce faci?",
+    text: "Ești implicat într-o discuție aprinsă. Cum reacționezi?",
     answers: [
-      { text: "Refuz direct, explicându-i că am deja planuri", style: "competitiv" },
-      { text: "Accept fără să comentez, pentru a nu crea probleme", style: "acomodativ" },
-      { text: "Încerc să găsesc un compromis, poate lucrând doar o parte din timpul cerut", style: "compromis" },
-      { text: "Discut cu șeful pentru a vedea dacă există alte opțiuni", style: "colaborativ" },
-      { text: "Nu dau un răspuns clar și sper că va găsi pe altcineva", style: "evitativ" }
+      { text: "Îți păstrezi calmul și încerci să argumentezi logic.", style: "colaborativ" },
+      { text: "Ridici vocea și te impui.", style: "competitiv" },
+      { text: "Te retragi din discuție.", style: "evitativ" },
+      { text: "Cedezi pentru a evita o escaladare a conflictului.", style: "acomodativ" },
+      { text: "Cauți o soluție de compromis care să satisfacă ambele părți.", style: "compromis" }
     ]
   },
   {
-    text: "Într-o dispută între doi colegi, amândoi îți cer sprijinul. Cum reacționezi?",
+    text: "Observi că un coleg este supărat. Cum reacționezi?",
     answers: [
-      { text: "Evit să mă implic pentru a nu deranja pe nimeni", style: "evitativ" },
-      { text: "Încerc să îi ajut să ajungă la un compromis", style: "compromis" },
-      { text: "Îi ascult pe amândoi și încerc să găsim o soluție împreună", style: "colaborativ" },
-      { text: "Susțin partea pe care o consider corectă, indiferent de consecințe", style: "competitiv" },
-      { text: "Sprijin pe oricare dintre ei pentru a menține relațiile bune", style: "acomodativ" }
+      { text: "Îl întrebi ce s-a întâmplat și îi oferi sprijinul.", style: "colaborativ" },
+      { text: "Îi spui să se calmeze și să se concentreze la treabă.", style: "competitiv" },
+      { text: "Te prefaci că nu observi nimic.", style: "evitativ" },
+      { text: "Îi oferi o vorbă bună sau o glumă pentru a-l înveseli.", style: "acomodativ" },
+      { text: "Îi propui să faceți o pauză împreună.", style: "compromis" }
     ]
   },
   {
-    text: "Un coleg face o greșeală într-un proiect, dar nimeni altcineva nu a observat. Cum reacționezi?",
+    text: "Ai o neînțelegere cu un membru al familiei. Cum o rezolvi?",
     answers: [
-      { text: "Îi atrag imediat atenția și insist să corecteze greșeala", style: "competitiv" },
-      { text: "Îi sugerez discret să își verifice din nou munca", style: "colaborativ" },
-      { text: "Nu spun nimic, pentru că nu vreau să creez probleme", style: "evitativ" },
-      { text: "Îi accept greșeala, pentru a nu tensiona relația", style: "acomodativ" },
-      { text: "Îi propun să găsim o soluție împreună", style: "compromis" }
+      { text: "Discuți deschis despre problemă și încerci să găsiți o soluție împreună.", style: "colaborativ" },
+      { text: "Îți impui punctul de vedere.", style: "competitiv" },
+      { text: "Cedezi pentru a păstra armonia în familie.", style: "acomodativ" },
+      { text: "Eviți conflictul și speri că se va rezolva de la sine.", style: "evitativ" },
+      { text: "Faceți compromisuri reciproce.", style: "compromis" }
     ]
   }
 ];
-
 
     const styleDescriptions = {
       competitiv: "Stilul competitiv este orientat spre rezultate și putere. Folosești acest stil când obiectivele tale sunt foarte importante.",
