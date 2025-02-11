@@ -53,35 +53,7 @@
       cursor: pointer;
       font-size: 1rem;
       transition: background-color 0.2s, color 0.2s;
-      -webkit-tap-highlight-color: transparent; /* Prevents tap highlight on iOS */
-      user-select: none; /* Prevents text selection */
     }
-    .answers .btn:active {
-  background-color: #007bff;
-  color: #fff;
-}
-
-/* Reset button state after click */
-.answers .btn:hover,
-.answers .btn:active,
-.answers .btn:focus {
-  background-color: #fff;
-  color: #007bff;
-}
-
-/* Only show hover effect on actual hover */
-.answers .btn:active:hover {
-  background-color: #007bff;
-  color: #fff;
-}
-
-/* Force remove hover state on mobile */
-@media (hover: none) {
-  .answers .btn:hover {
-    background-color: #fff;
-    color: #007bff;
-  }
-}
     .back {
         
       width: 100%;
@@ -98,7 +70,7 @@
     .back:hover {
         background-color: #0067d4;
     }
-    .answers .btn:hover {
+    .btn:hover {
       background-color: #007bff;
       color: #fff;
     }
@@ -340,7 +312,6 @@ const questions = [
       answers = [];
       showResults = false;
       render();
-  addTouchHandlers(); // Add this line
     }
 
     // Render the quiz (either question or results)
@@ -394,23 +365,14 @@ style="display: block; margin: 0 auto; width: auto; height: auto; max-width: 200
     }
     // Handle answer click
     function handleAnswer(style) {
-  // Disable all buttons immediately after click
-  const buttons = document.querySelectorAll('.btn');
-  buttons.forEach(button => button.disabled = true);
-  
-  // Add the answer
-  answers.push(style);
-  
-  // Use setTimeout to delay the transition to next question
-  setTimeout(() => {
-    if (currentQuestion < questions.length - 1) {
-      currentQuestion++;
-    } else {
-      showResults = true;
+      answers.push(style);
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+      } else {
+        showResults = true;
+      }
+      render();
     }
-    render();
-  }, 100); // 100ms delay should be enough to prevent accidental clicks
-}
 
     // Calculate results
     function calculateResults() {
@@ -421,25 +383,7 @@ style="display: block; margin: 0 auto; width: auto; height: auto; max-width: 200
       });
       return counts;
     }
-function addTouchHandlers() {
-  document.addEventListener('touchend', function(e) {
-    // Find all buttons and reset their styles
-    const buttons = document.querySelectorAll('.btn');
-    buttons.forEach(button => {
-      button.style.backgroundColor = '';
-      button.style.color = '';
-    });
-  });
 
-  document.addEventListener('touchcancel', function(e) {
-    // Also reset on touch cancel
-    const buttons = document.querySelectorAll('.btn');
-    buttons.forEach(button => {
-      button.style.backgroundColor = '';
-      button.style.color = '';
-    });
-  });
-}
     // Render results page
     function renderResults() {
       const results = calculateResults();
