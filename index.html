@@ -340,6 +340,7 @@ const questions = [
       answers = [];
       showResults = false;
       render();
+  addTouchHandlers(); // Add this line
     }
 
     // Render the quiz (either question or results)
@@ -420,7 +421,25 @@ style="display: block; margin: 0 auto; width: auto; height: auto; max-width: 200
       });
       return counts;
     }
+function addTouchHandlers() {
+  document.addEventListener('touchend', function(e) {
+    // Find all buttons and reset their styles
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(button => {
+      button.style.backgroundColor = '';
+      button.style.color = '';
+    });
+  });
 
+  document.addEventListener('touchcancel', function(e) {
+    // Also reset on touch cancel
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(button => {
+      button.style.backgroundColor = '';
+      button.style.color = '';
+    });
+  });
+}
     // Render results page
     function renderResults() {
       const results = calculateResults();
