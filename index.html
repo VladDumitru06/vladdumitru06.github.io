@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RCI - Conflict Management Quiz</title>
   <style>
-    /* Container Card */
     .card {
       max-width: 800px;
       margin: 20px auto;
@@ -16,7 +15,6 @@
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
-    /* Card Header */
     .card-header {
       margin-bottom: 16px;
     }
@@ -27,19 +25,16 @@
       color: black;
     }
 
-    /* Card Content */
     .card-content {
       font-family: Arial, sans-serif;
     }
 
-    /* Question Text */
     .question-text {
       font-size: 1.2rem;
       margin-bottom: 20px;
       color: black;
     }
 
-    /* Answer Buttons */
     .answers .btn {
       display: block;
       width: 100%;
@@ -54,8 +49,18 @@
       font-size: 1rem;
       transition: background-color 0.2s, color 0.2s;
     }
+
+    .answers .btn:hover {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    .answers .btn.selected {
+      background-color: #007bff;
+      color: #fff;
+    }
+
     .back {
-        
       width: 100%;
       padding: 10px;
       border: none;
@@ -67,15 +72,33 @@
       margin-top: 20px;
       transition: background-color 0.2s;
     }
+
     .back:hover {
-        background-color: #0067d4;
-    }
-    .btn:hover {
-      background-color: #007bff;
-      color: #fff;
+      background-color: #0067d4;
     }
 
-    /* Results Section */
+    .continue-btn {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background-color: #28a745;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 20px;
+      transition: background-color 0.2s;
+    }
+
+    .continue-btn:hover {
+      background-color: #218838;
+    }
+
+    .continue-btn:disabled {
+      background-color: #6c757d;
+      cursor: not-allowed;
+    }
+
     .results .result-row {
       display: flex;
       align-items: center;
@@ -109,7 +132,6 @@
       color: black;
     }
 
-    /* Dominant Styles Description */
     .dominant-styles {
       margin-top: 20px;
       color: black;
@@ -137,14 +159,12 @@
       color: black;
     }
 
-    /* Icon Styling */
     .icon {
       width: 20px;
       height: 20px;
       fill: #007bff;
     }
 
-    /* Restart Button */
     .restart-btn {
       width: 100%;
       padding: 10px;
@@ -164,114 +184,111 @@
   </style>
 </head>
 <body>
-  <!-- Container where the quiz will be rendered -->
   <div id="quiz-container"></div>
 
   <script>
-
-
-const questions = [
-  {
-    text: "Ești liderul unui proiect, iar un membru al echipei întârzie constant cu sarcinile. Cum abordezi situația?",
-    answers: [
-      { text: "Îl confrunți direct și îi impui să respecte termenele.", style: "competitiv" },
-      { text: "Discuți cu el în privat, încercând să înțelegi motivele întârzierilor și să găsiți soluții împreună.", style: "colaborativ" },
-      { text: "Îi acorzi mai mult timp, sperând că se va mobiliza singur.", style: "evitativ" },
-      { text: "Preiei o parte din sarcinile lui pentru a nu afecta proiectul.", style: "acomodativ" },
-      { text: "Îi oferi un ultimatum: fie se conformează, fie este exclus din echipă.", style: "compromis" }
-    ]
-  },
-  {
-    text: "Într-o negociere, cealaltă parte adoptă o poziție inflexibilă. Cum reacționezi?",
-    answers: [
-      { text: "Cauți puncte comune și încerci să găsești o soluție avantajoasă pentru ambele părți.", style: "colaborativ" },
-      { text: "Menții o poziție fermă și nu cedezi până nu obții ce vrei.", style: "competitiv" },
-      { text: "Faci concesii majore pentru a ajunge la un acord.", style: "acomodativ" },
-      { text: "Întrerupi negocierea și cauți alternative.", style: "evitativ" },
-      { text: "Propun o soluție de compromis, fiecare parte cedând puțin.", style: "compromis" }
-    ]
-  },
-  {
-    text: "Un coleg îți cere ajutorul pentru o sarcină complexă, dar ești presat de timp. Cum răspunzi?",
-    answers: [
-      { text: "Refuzi politicos, explicând că nu ai timp.", style: "competitiv" },
-      { text: "Îi oferi ajutor limitat, în funcție de disponibilitatea ta.", style: "compromis" },
-      { text: "Îl ajuți, chiar dacă asta înseamnă să-ți neglijezi propriile sarcini.", style: "acomodativ" },
-      { text: "Îi sugerezi să ceară ajutorul altei persoane.", style: "evitativ" },
-      { text: "Îi propui să lucrați împreună la sarcină, împărțind responsabilitățile.", style: "colaborativ" }
-    ]
-  },
-  {
-    text: "Ești martorul unui conflict între doi colegi. Cum intervii?",
-    answers: [
-      { text: "Îi lași să-și rezolve singuri conflictul.", style: "evitativ" },
-      { text: "Intermediezi și încerci să-i ajuți să ajungă la un compromis.", style: "compromis" },
-      { text: "Iei partea celui care crezi că are dreptate.", style: "competitiv" },
-      { text: "Îi asculți pe amândoi și încerci să găsiți o soluție care să-i mulțumească pe toți.", style: "colaborativ" },
-      { text: "Încerci să calmezi spiritele și să-i împaci.", style: "acomodativ" }
-    ]
-  },
-  {
-    text: "Ai o idee inovatoare, dar riscantă, pentru un proiect. Cum o prezinți echipei?",
-    answers: [
-      { text: "Îți asumi riscul și o prezinți cu entuziasm, argumentând beneficiile.", style: "competitiv" },
-      { text: "O prezinți cu precauție, subliniind și posibilele riscuri.", style: "compromis" },
-      { text: "Renunți la idee, preferând să mergi la sigur.", style: "evitativ" },
-      { text: "O adaptezi la ideile celorlalți, pentru a fi mai ușor acceptată.", style: "acomodativ" },
-      { text: "Organizezi o sesiune de brainstorming pentru a dezvolta ideea împreună cu echipa.", style: "colaborativ" }
-    ]
-  },
-  {
-    text: "Un client se plânge de un produs/serviciu. Cum gestionezi reclamația?",
-    answers: [
-      { text: "Îți ceri scuze și oferi o compensație.", style: "acomodativ" },
-      { text: "Îl asculți cu atenție și încerci să găsești o soluție care să-l mulțumească.", style: "colaborativ" },
-      { text: "Îi explici de ce nu are dreptate.", style: "competitiv" },
-      { text: "Îi oferi o soluție standard, conform procedurilor.", style: "compromis" },
-      { text: "Îl redirecționezi către altcineva.", style: "evitativ" }
-    ]
-  },
-  {
-    text: "Trebuie să iei o decizie importantă într-un timp scurt. Cum procedezi?",
-    answers: [
-      { text: "Te bazezi pe intuiție și experiență.", style: "competitiv" },
-      { text: "Aduni informații și analizezi toate opțiunile.", style: "colaborativ" },
-      { text: "Ceri sfatul unor persoane de încredere.", style: "compromis" },
-      { text: "Amâni decizia cât mai mult posibil.", style: "evitativ" },
-      { text: "Te conformezi opiniei majorității.", style: "acomodativ" }
-    ]
-  },
-  {
-    text: "Ești implicat într-o discuție aprinsă. Cum reacționezi?",
-    answers: [
-      { text: "Îți păstrezi calmul și încerci să argumentezi logic.", style: "colaborativ" },
-      { text: "Ridici vocea și te impui.", style: "competitiv" },
-      { text: "Te retragi din discuție.", style: "evitativ" },
-      { text: "Cedezi pentru a evita o escaladare a conflictului.", style: "acomodativ" },
-      { text: "Cauți o soluție de compromis care să satisfacă ambele părți.", style: "compromis" }
-    ]
-  },
-  {
-    text: "Observi că un coleg este supărat. Cum reacționezi?",
-    answers: [
-      { text: "Îl întrebi ce s-a întâmplat și îi oferi sprijinul.", style: "colaborativ" },
-      { text: "Îi spui să se calmeze și să se concentreze la treabă.", style: "competitiv" },
-      { text: "Te prefaci că nu observi nimic.", style: "evitativ" },
-      { text: "Îi oferi o vorbă bună sau o glumă pentru a-l înveseli.", style: "acomodativ" },
-      { text: "Îi propui să faceți o pauză împreună.", style: "compromis" }
-    ]
-  },
-  {
-    text: "Ai o neînțelegere cu un membru al familiei. Cum o rezolvi?",
-    answers: [
-      { text: "Discuți deschis despre problemă și încerci să găsiți o soluție împreună.", style: "colaborativ" },
-      { text: "Îți impui punctul de vedere.", style: "competitiv" },
-      { text: "Cedezi pentru a păstra armonia în familie.", style: "acomodativ" },
-      { text: "Eviți conflictul și speri că se va rezolva de la sine.", style: "evitativ" },
-      { text: "Faceți compromisuri reciproce.", style: "compromis" }
-    ]
-  }
-];
+    const questions = [
+      {
+        text: "Ești liderul unui proiect, iar un membru al echipei întârzie constant cu sarcinile. Cum abordezi situația?",
+        answers: [
+          { text: "Îl confrunți direct și îi impui să respecte termenele.", style: "competitiv" },
+          { text: "Discuți cu el în privat, încercând să înțelegi motivele întârzierilor și să găsiți soluții împreună.", style: "colaborativ" },
+          { text: "Îi acorzi mai mult timp, sperând că se va mobiliza singur.", style: "evitativ" },
+          { text: "Preiei o parte din sarcinile lui pentru a nu afecta proiectul.", style: "acomodativ" },
+          { text: "Îi oferi un ultimatum: fie se conformează, fie este exclus din echipă.", style: "compromis" }
+        ]
+      },
+      {
+        text: "Într-o negociere, cealaltă parte adoptă o poziție inflexibilă. Cum reacționezi?",
+        answers: [
+          { text: "Cauți puncte comune și încerci să găsești o soluție avantajoasă pentru ambele părți.", style: "colaborativ" },
+          { text: "Menții o poziție fermă și nu cedezi până nu obții ce vrei.", style: "competitiv" },
+          { text: "Faci concesii majore pentru a ajunge la un acord.", style: "acomodativ" },
+          { text: "Întrerupi negocierea și cauți alternative.", style: "evitativ" },
+          { text: "Propun o soluție de compromis, fiecare parte cedând puțin.", style: "compromis" }
+        ]
+      },
+      {
+        text: "Un coleg îți cere ajutorul pentru o sarcină complexă, dar ești presat de timp. Cum răspunzi?",
+        answers: [
+          { text: "Refuzi politicos, explicând că nu ai timp.", style: "competitiv" },
+          { text: "Îi oferi ajutor limitat, în funcție de disponibilitatea ta.", style: "compromis" },
+          { text: "Îl ajuți, chiar dacă asta înseamnă să-ți neglijezi propriile sarcini.", style: "acomodativ" },
+          { text: "Îi sugerezi să ceară ajutorul altei persoane.", style: "evitativ" },
+          { text: "Îi propui să lucrați împreună la sarcină, împărțind responsabilitățile.", style: "colaborativ" }
+        ]
+      },
+      {
+        text: "Ești martorul unui conflict între doi colegi. Cum intervii?",
+        answers: [
+          { text: "Îi lași să-și rezolve singuri conflictul.", style: "evitativ" },
+          { text: "Intermediezi și încerci să-i ajuți să ajungă la un compromis.", style: "compromis" },
+          { text: "Iei partea celui care crezi că are dreptate.", style: "competitiv" },
+          { text: "Îi asculți pe amândoi și încerci să găsiți o soluție care să-i mulțumească pe toți.", style: "colaborativ" },
+          { text: "Încerci să calmezi spiritele și să-i împaci.", style: "acomodativ" }
+        ]
+      },
+      {
+        text: "Ai o idee inovatoare, dar riscantă, pentru un proiect. Cum o prezinți echipei?",
+        answers: [
+          { text: "Îți asumi riscul și o prezinți cu entuziasm, argumentând beneficiile.", style: "competitiv" },
+          { text: "O prezinți cu precauție, subliniind și posibilele riscuri.", style: "compromis" },
+          { text: "Renunți la idee, preferând să mergi la sigur.", style: "evitativ" },
+          { text: "O adaptezi la ideile celorlalți, pentru a fi mai ușor acceptată.", style: "acomodativ" },
+          { text: "Organizezi o sesiune de brainstorming pentru a dezvolta ideea împreună cu echipa.", style: "colaborativ" }
+        ]
+      },
+      {
+        text: "Un client se plânge de un produs/serviciu. Cum gestionezi reclamația?",
+        answers: [
+          { text: "Îți ceri scuze și oferi o compensație.", style: "acomodativ" },
+          { text: "Îl asculți cu atenție și încerci să găsești o soluție care să-l mulțumească.", style: "colaborativ" },
+          { text: "Îi explici de ce nu are dreptate.", style: "competitiv" },
+          { text: "Îi oferi o soluție standard, conform procedurilor.", style: "compromis" },
+          { text: "Îl redirecționezi către altcineva.", style: "evitativ" }
+        ]
+      },
+      {
+        text: "Trebuie să iei o decizie importantă într-un timp scurt. Cum procedezi?",
+        answers: [
+          { text: "Te bazezi pe intuiție și experiență.", style: "competitiv" },
+          { text: "Aduni informații și analizezi toate opțiunile.", style: "colaborativ" },
+          { text: "Ceri sfatul unor persoane de încredere.", style: "compromis" },
+          { text: "Amâni decizia cât mai mult posibil.", style: "evitativ" },
+          { text: "Te conformezi opiniei majorității.", style: "acomodativ" }
+        ]
+      },
+      {
+        text: "Ești implicat într-o discuție aprinsă. Cum reacționezi?",
+        answers: [
+          { text: "Îți păstrezi calmul și încerci să argumentezi logic.", style: "colaborativ" },
+          { text: "Ridici vocea și te impui.", style: "competitiv" },
+          { text: "Te retragi din discuție.", style: "evitativ" },
+          { text: "Cedezi pentru a evita o escaladare a conflictului.", style: "acomodativ" },
+          { text: "Cauți o soluție de compromis care să satisfacă ambele părți.", style: "compromis" }
+        ]
+      },
+      {
+        text: "Observi că un coleg este supărat. Cum reacționezi?",
+        answers: [
+          { text: "Îl întrebi ce s-a întâmplat și îi oferi sprijinul.", style: "colaborativ" },
+          { text: "Îi spui să se calmeze și să se concentreze la treabă.", style: "competitiv" },
+          { text: "Te prefaci că nu observi nimic.", style: "evitativ" },
+          { text: "Îi oferi o vorbă bună sau o glumă pentru a-l înveseli.", style: "acomodativ" },
+          { text: "Îi propui să faceți o pauză împreună.", style: "compromis" }
+        ]
+      },
+      {
+        text: "Ai o neînțelegere cu un membru al familiei. Cum o rezolvi?",
+        answers: [
+          { text: "Discuți deschis despre problemă și încerci să găsiți o soluție împreună.", style: "colaborativ" },
+          { text: "Îți impui punctul de vedere.", style: "competitiv" },
+          { text: "Cedezi pentru a păstra armonia în familie.", style: "acomodativ" },
+          { text: "Eviți conflictul și speri că se va rezolva de la sine.", style: "evitativ" },
+          { text: "Faceți compromisuri reciproce.", style: "compromis" }
+        ]
+      }
+    ];
 
     const styleDescriptions = {
       competitiv: "Stilul competitiv este orientat spre rezultate și putere. Folosești acest stil când obiectivele tale sunt foarte importante.",
@@ -281,16 +298,14 @@ const questions = [
       acomodativ: "Stilul acomodativ pune accent pe menținerea relațiilor. Este util când problema nu este foarte importantă pentru tine."
     };
 
-    // Application state
     let shuffledQuestions = [];
     let currentQuestion = 0;
     let answers = [];
     let showResults = false;
+    let selectedAnswer = null;
 
-    // Get reference to the container
     const container = document.getElementById("quiz-container");
 
-    // Utility: shuffle an array
     function shuffleArray(array) {
       const newArray = array.slice();
       for (let i = newArray.length - 1; i > 0; i--) {
@@ -300,21 +315,18 @@ const questions = [
       return newArray;
     }
 
-    // Initialize quiz by shuffling answers for each question
     function initQuiz() {
-      shuffledQuestions = questions.map(q => {
-        return {
-          text: q.text,
-          answers: shuffleArray(q.answers)
-        };
-      });
+      shuffledQuestions = questions.map(q => ({
+        text: q.text,
+        answers: shuffleArray(q.answers)
+      }));
       currentQuestion = 0;
       answers = [];
       showResults = false;
+      selectedAnswer = null;
       render();
     }
 
-    // Render the quiz (either question or results)
     function render() {
       if (showResults) {
         renderResults();
@@ -323,14 +335,13 @@ const questions = [
       }
     }
 
-    // Render current question
     function renderQuestion() {
       const question = shuffledQuestions[currentQuestion];
       container.innerHTML = `
-     <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGVC4-KJp0GDg/company-logo_200_200/company-logo_200_200/0/1695885935244/romcapital_invest_logo?e=2147483647&v=beta&t=PjPTWKefimBulhcwdCNJPpNTM0WkW1XuUaDimc5gbt8" 
-alt="Logo RCI" 
-style="display: block; margin: 0 auto; width: auto; height: auto; max-width: 200px; border-radius: 8px; margin-bottom: 20px;">
-  <div class="card">
+        <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGVC4-KJp0GDg/company-logo_200_200/company-logo_200_200/0/1695885935244/romcapital_invest_logo?e=2147483647&v=beta&t=PjPTWKefimBulhcwdCNJPpNTM0WkW1XuUaDimc5gbt8" 
+            alt="Logo RCI" 
+            style="display: block; margin: 0 auto; width: auto; height: auto; max-width: 200px; border-radius: 8px; margin-bottom: 20px;">
+        <div class="card">
           <div class="card-header">
             <h2 class="card-title">Întrebarea ${currentQuestion + 1} din ${questions.length}</h2>
           </div>
@@ -340,41 +351,58 @@ style="display: block; margin: 0 auto; width: auto; height: auto; max-width: 200
               ${question.answers
                 .map(
                   (answer, index) => `
-                <button class="btn" onclick="handleAnswer('${answer.style}')">
+                <button class="btn ${selectedAnswer === answer.style ? 'selected' : ''}" 
+                        onclick="selectAnswer('${answer.style}')">
                   ${answer.text}
                 </button>
-                
               `
                 )
                 .join("")}
-            ${currentQuestion > 0 ? `<button class="back" onclick="backAnswer()">
-                  Inapoi
-                </button>` : ``} 
+              
+              <button class="continue-btn" 
+                      onclick="handleAnswer()" 
+                      ${selectedAnswer === null ? 'disabled' : ''}>
+                Continuă
+              </button>
+              
+              ${currentQuestion > 0 ? `
+                <button class="back" onclick="backAnswer()">
+                  Înapoi
+                </button>
+              ` : ''}
             </div>
           </div>
         </div>
       `;
     }
+
+    function selectAnswer(style) {
+      selectedAnswer = style;
+      render();
+    }
+
+    function handleAnswer() {
+      if (selectedAnswer) {
+        answers.push(selectedAnswer);
+        selectedAnswer = null;
+        if (currentQuestion < questions.length - 1) {
+          currentQuestion++;
+        } else {
+          showResults = true;
+        }
+        render();
+      }
+    }
+
     function backAnswer() {
       if (currentQuestion > 0) {
         currentQuestion--;
-        answers.pop()
-            
-      }
-      render();
-    }
-    // Handle answer click
-    function handleAnswer(style) {
-      answers.push(style);
-      if (currentQuestion < questions.length - 1) {
-        currentQuestion++;
-      } else {
-        showResults = true;
+        answers.pop();
+        selectedAnswer = null;
       }
       render();
     }
 
-    // Calculate results
     function calculateResults() {
       const styles = ["competitiv", "colaborativ", "compromis", "evitativ", "acomodativ"];
       const counts = {};
@@ -384,7 +412,6 @@ style="display: block; margin: 0 auto; width: auto; height: auto; max-width: 200
       return counts;
     }
 
-    // Render results page
     function renderResults() {
       const results = calculateResults();
       const maxScore = Math.max(...Object.values(results));
@@ -392,12 +419,12 @@ style="display: block; margin: 0 auto; width: auto; height: auto; max-width: 200
         .filter(([style, score]) => score === maxScore)
         .map(([style]) => style);
 
-      container.innerHTML = ` <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGVC4-KJp0GDg/company-logo_200_200/company-logo_200_200/0/1695885935244/romcapital_invest_logo?e=2147483647&v=beta&t=PjPTWKefimBulhcwdCNJPpNTM0WkW1XuUaDimc5gbt8" 
-alt="Logo RCI" 
-style="display: block; margin: 0 auto; width: auto; height: auto; max-width: 200px; border-radius: 8px; margin-bottom: 20px;">
+      container.innerHTML = `
+        <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGVC4-KJp0GDg/company-logo_200_200/company-logo_200_200/0/1695885935244/romcapital_invest_logo?e=2147483647&v=beta&t=PjPTWKefimBulhcwdCNJPpNTM0WkW1XuUaDimc5gbt8" 
+            alt="Logo RCI" 
+            style="display: block; margin: 0 auto; width: auto; height: auto; max-width: 200px; border-radius: 8px; margin-bottom: 20px;">
         <div class="card">
           <div class="card-header">
-            
             <h2 class="card-title">Rezultatele tale</h2>
           </div>
           <div class="card-content">
@@ -440,7 +467,6 @@ style="display: block; margin: 0 auto; width: auto; height: auto; max-width: 200
       `;
     }
 
-    // Returns the inline SVG for AlertCircle icon (from lucide icons)
     function getAlertCircleSVG() {
       return `
       <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" stroke="#007bff" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -451,7 +477,6 @@ style="display: block; margin: 0 auto; width: auto; height: auto; max-width: 200
       `;
     }
 
-    // Start the quiz once the DOM is loaded
     window.onload = initQuiz;
   </script>
 </body>
