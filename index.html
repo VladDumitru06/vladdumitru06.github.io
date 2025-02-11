@@ -365,14 +365,23 @@ style="display: block; margin: 0 auto; width: auto; height: auto; max-width: 200
     }
     // Handle answer click
     function handleAnswer(style) {
-      answers.push(style);
-      if (currentQuestion < questions.length - 1) {
-        currentQuestion++;
-      } else {
-        showResults = true;
-      }
-      render();
+  // Disable all buttons immediately after click
+  const buttons = document.querySelectorAll('.btn');
+  buttons.forEach(button => button.disabled = true);
+  
+  // Add the answer
+  answers.push(style);
+  
+  // Use setTimeout to delay the transition to next question
+  setTimeout(() => {
+    if (currentQuestion < questions.length - 1) {
+      currentQuestion++;
+    } else {
+      showResults = true;
     }
+    render();
+  }, 100); // 100ms delay should be enough to prevent accidental clicks
+}
 
     // Calculate results
     function calculateResults() {
