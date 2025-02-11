@@ -62,9 +62,17 @@
 }
 
 /* Reset button state after click */
+.answers .btn:hover,
+.answers .btn:active,
 .answers .btn:focus {
   background-color: #fff;
   color: #007bff;
+}
+
+/* Only show hover effect on actual hover */
+.answers .btn:active:hover {
+  background-color: #007bff;
+  color: #fff;
 }
 
 /* Force remove hover state on mobile */
